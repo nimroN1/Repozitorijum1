@@ -1,11 +1,30 @@
+<p>{{mojNaslov}}</p>
+
 <p>{{currentDate}}</p>
 
 <p>{{10+saberiDvaBroja(5, 6)}}</p>
 
-<p>Student: 
+<p>Student:
 
     {{currentStudent.ime}}, {{currentStudent.prezime}}, <br>
-    {{currentStudent.brIndexa}}
-
+    {{currentStudent.brIndexa}}, <br>
+    <!--     {{currentStudent.tel[0]}}, <br> 
+    {{currentStudent.tel[1]}} -->
 
 </p>
+
+<div id="phoneNumbersPaneId" *ngIf = "currentStudent.tel.length>0">
+    <p>Phone numbers:</p> 
+
+    <p *ngFor = "let phoneNumber of currentStudent.tel">{{phoneNumber}}</p>
+
+</div>
+
+<div *ngIf = "currentStudent.tel.length==0">
+    <p>No phone numbers!</p>
+</div>
+
+<input type="text" [value] = "currentStudent.ime"/>
+
+<button (click)="logName()">Log Name</button>
+
