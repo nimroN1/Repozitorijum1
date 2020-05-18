@@ -1,3 +1,15 @@
 #phoneNumbersPaneId{
     border:5px solid red;
 }
+
+.dateClass{
+    border:1px solid grey;
+}
+
+.naslovClass{
+    background-color:green;
+}
+
+.datumClass{
+    background-color: hotpink;
+}

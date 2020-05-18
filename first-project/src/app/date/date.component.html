@@ -1,30 +1,39 @@
-<p>{{mojNaslov}}</p>
+<div class="dateClass">
 
-<p>{{currentDate}}</p>
+    <p class="naslovClass">{{mojNaslov}}</p>
 
-<p>{{10+saberiDvaBroja(5, 6)}}</p>
+    <p class="datumClass">{{currentDate}}</p>
 
-<p>Student:
+    <p>{{10+saberiDvaBroja(5, 6)}}</p>
 
-    {{currentStudent.ime}}, {{currentStudent.prezime}}, <br>
-    {{currentStudent.brIndexa}}, <br>
-    <!--     {{currentStudent.tel[0]}}, <br> 
+    <p>Student:
+
+        {{currentStudent.ime}}, {{currentStudent.prezime}}, <br>
+        {{currentStudent.brIndexa}}, <br>
+        <!--     {{currentStudent.tel[0]}}, <br> 
     {{currentStudent.tel[1]}} -->
 
-</p>
+    </p>
 
-<div id="phoneNumbersPaneId" *ngIf = "currentStudent.tel.length>0">
-    <p>Phone numbers:</p> 
+    <div id="phoneNumbersPaneId" *ngIf="currentStudent.tel.length>0">
+        <p>Phone numbers:</p>
 
-    <p *ngFor = "let phoneNumber of currentStudent.tel">{{phoneNumber}}</p>
+        <p *ngFor="let phoneNumber of currentStudent.tel">{{phoneNumber}}</p>
+
+    </div>
+
+    <div *ngIf="currentStudent.tel.length==0">
+        <p>No phone numbers!</p>
+    </div>
+
+    <input type="text" [value]="currentStudent.ime" />
+
+    <button (click)="logName()">Log Name</button>
+
+    <br />
+
+    <input type="text" [(ngModel)]="korisnickiUnos" />
+
+    <p>{{korisnickiUnos}}</p>
 
 </div>
-
-<div *ngIf = "currentStudent.tel.length==0">
-    <p>No phone numbers!</p>
-</div>
-
-<input type="text" [value] = "currentStudent.ime"/>
-
-<button (click)="logName()">Log Name</button>
-

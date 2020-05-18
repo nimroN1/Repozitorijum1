@@ -9,10 +9,14 @@ import { Student } from '../model/Student';
 export class DateComponent implements OnInit {
 
   currentDate:String;
+  
+  @Input('student')
   currentStudent:Student;
 
   @Input('myTitle')
   mojNaslov:String;
+
+  korisnickiUnos:String;
 
   constructor() { }
 
@@ -25,11 +29,11 @@ export class DateComponent implements OnInit {
 
 
 
-    this.currentStudent = new Student();
+/*     this.currentStudent = new Student();
 
     this.currentStudent.brIndexa=1;
     this.currentStudent.ime="Mladen";
-    this.currentStudent.prezime = "Rosić";
+    this.currentStudent.prezime = "Rosić"; */
 /*     this.currentStudent.tel.push("065-111-222");
     this.currentStudent.tel.push("055-555-666"); */
     console.log("Current student: ");
@@ -44,14 +48,19 @@ export class DateComponent implements OnInit {
       console.log(this.currentStudent.tel[i]);
     }
 
+    this.korisnickiUnos="početna vrednost";
+
   }
 
   public saberiDvaBroja(x:number, y:number): number{
+    this.logName();
     return x+y;
   }
 
   public logName(){
     console.log(this.currentStudent.ime);
   }
+
+
 
 }
