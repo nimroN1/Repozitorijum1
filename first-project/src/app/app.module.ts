@@ -9,6 +9,7 @@ import { Test2Component } from './test2/test2.component';
 import { DateComponent } from './date/date.component';
 import { from } from 'rxjs';
 import { DatumModule } from './datum/datum.module';
+import { CustomWriteServiceService } from 'src/custom-write-service.service';
 
 @NgModule({
   declarations: [
