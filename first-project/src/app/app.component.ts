@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Student } from './model/Student';
 import { CustomWriteServiceService } from 'src/custom-write-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,13 @@ export class AppComponent {
 
   title = 'first-project';
 
-  constructor(private cws:CustomWriteServiceService){
+  name: String;
+  location: String;
+  username: String;
+
+  response: any;
+
+  constructor(private cws:CustomWriteServiceService, private http:HttpClient){
 
   }
 
@@ -25,5 +32,20 @@ export class AppComponent {
     this.student1.tel.push("055-555-666"); 
 
     this.cws.simpleLog("Hello from service!");
+
+
+  }
+
+  public getUserFromGitHub(){
+    let obs = this.http.get('https://api.github.com/users/'+this.username);
+
+    obs.subscribe((data)=>{
+      console.log(data);
+
+      this.name = data['name'];
+      this.location = data['location'];
+
+      this.response = data;
+    });
   }
 }

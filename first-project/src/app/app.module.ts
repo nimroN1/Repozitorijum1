@@ -10,6 +10,7 @@ import { DateComponent } from './date/date.component';
 import { from } from 'rxjs';
 import { DatumModule } from './datum/datum.module';
 import { CustomWriteServiceService } from 'src/custom-write-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CustomWriteServiceService } from 'src/custom-write-service.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    DatumModule
+    DatumModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
