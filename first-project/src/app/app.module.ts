@@ -11,13 +11,23 @@ import { from } from 'rxjs';
 import { DatumModule } from './datum/datum.module';
 import { CustomWriteServiceService } from 'src/custom-write-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ArticlesComponent } from './articles/articles.component';
+import { LoginComponent } from './login/login.component';
+import { AboutComponent } from './about/about.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AboutAdminComponent } from './about/about-admin/about-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Test1Component,
     Test2Component,
-    DateComponent
+    DateComponent,
+    ArticlesComponent,
+    LoginComponent,
+    AboutComponent,
+    PageNotFoundComponent,
+    AboutAdminComponent
   ],
   imports: [
     BrowserModule,
