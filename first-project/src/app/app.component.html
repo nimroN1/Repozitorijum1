@@ -24,7 +24,7 @@
             <div id="admin-sidebar" class="col-md-2 p-x-0 p-y-3">
                 <ul class="sidenav admin-sidenav list-unstyled">
                     <li><a routerLink="login">Login</a></li>
-                    <li><a routerLink="articles/1">Articles</a></li>
+                    <li><a [routerLink]="['articles', student1.ime]">Articles</a></li>
                     <li><a routerLink="about">About</a></li>
                     <li><a routerLink="#">About admin</a></li>               
                 </ul>
