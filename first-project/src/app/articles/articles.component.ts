@@ -12,6 +12,11 @@ export class ArticlesComponent implements OnInit {
   id:String;
   studenti:Student[] = [];
 
+  imeStudenta:String = "";
+  prezimeStudenta:String = "";
+  brIndexaStudenta:number = 0;
+  brTelStudenta:String[] = [];
+
   constructor(private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -34,6 +39,15 @@ export class ArticlesComponent implements OnInit {
     s2.tel.push('065/444-333');
 
     this.studenti.push(s2);
+  }
+
+  public onSacuvaj():void{
+    let s = new Student();
+    s.ime = this.imeStudenta;
+    s.prezime = this.prezimeStudenta;
+    s.brIndexa = this.brIndexaStudenta;
+
+    this.studenti.push(s);
   }
 
 }

@@ -7,22 +7,26 @@
 <form>
     <div class="form-row">
       <label for="exampleInputIme">Ime</label>
-      <input type="text" class="form-control" id="exampleInputIme" placeholder="Ime" style="width:25%">
+      <input type="text" class="form-control" id="exampleInputIme" placeholder="Ime" style="width:25%" 
+      name="studentIme" [(ngModel)]="imeStudenta">
     </div>
     <div class="form-row">
       <label for="exampleInputPrezime">Prezime</label>
-      <input type="text" class="form-control"  id="exampleInputPrezime" placeholder="Prezime" style="width:25%">
+      <input type="text" class="form-control"  id="exampleInputPrezime" placeholder="Prezime" style="width:25%" 
+      name = "studentPrezime" [(ngModel)]="prezimeStudenta">
     </div>
     <div class="form-row">
         <label for="exampleInputIndeks">Indeks</label>
-        <input type="text" class="form-control"  id="exampleInputIndeks" placeholder="Indeks" style="width:25%">
+        <input type="text" class="form-control"  id="exampleInputIndeks" placeholder="Indeks" style="width:25%" 
+        name = "studentBrIndexa" [(ngModel)]="brIndexaStudenta">
       </div>
       <div class="form-row">
         <label for="exampleInputTel">Telefon</label>
         <input type="text" class="form-control"  id="exampleInputTel" placeholder="Telefon" style="width:25%">
       </div>
       <div class="form-row">
-        <input type="submit" class="form-control"  id="submitButton" value="Sačuvaj">
+        <input type="submit" class="form-control"  id="submitButton" value="Sačuvaj" 
+        (click)=onSacuvaj()>
       </div>
     
   </form>
@@ -48,64 +52,6 @@
                                             <td>{{student.prezime}}</td>
                                             <td>{{student.brIndexa}}</td>
                                             <td *ngFor = "let tel of student.tel">{{tel}}</td>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Project Name</th>
-                                            <th>Employer</th>
-                                            <th>Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Contest Name</th>
-                                            <th>Date</th>
-                                            <th>Award Position</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
                                         </tr>
                                     </tbody>
                                 </table>
