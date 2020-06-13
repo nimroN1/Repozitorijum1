@@ -14,14 +14,14 @@ public class AddressService {
 	@Autowired
 	AddressRepository addressRepository;
 	
-	public void createAddress(){
+	public Address createAddress(Address address){
 		Address adr = new Address();
-		adr.setCountry("Srbija");
-		adr.setCity("Beograd");
-		adr.setStreet("Kneza Lazara");
-		adr.setNumber(8);
+		adr.setCountry(address.getCountry());
+		adr.setCity(address.getCity());
+		adr.setStreet(address.getStreet());
+		adr.setNumber(address.getNumber());
 		
-		addressRepository.save(adr);
+		return addressRepository.save(adr);
 	}
 	
 	
@@ -34,8 +34,8 @@ public class AddressService {
 		  return retVal;
 	  }
 	  
-	  public void updateAddress(Address address) {
-		  addressRepository.save(address);
+	  public Address updateAddress(Address address) {
+		  return addressRepository.save(address);
 	  }
 	  
 	  public void deleteAddress(long id) {
