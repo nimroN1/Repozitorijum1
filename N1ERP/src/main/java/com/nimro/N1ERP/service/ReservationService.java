@@ -7,17 +7,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nimro.N1ERP.dto.ReservationDTO;
+import com.nimro.N1ERP.model.HotelRoom;
 import com.nimro.N1ERP.model.Reservation;
+import com.nimro.N1ERP.model.User;
+import com.nimro.N1ERP.repository.HotelRoomRepository;
 import com.nimro.N1ERP.repository.ReservationRepository;
+import com.nimro.N1ERP.repository.UserRepository;
 
 @Service
 public class ReservationService {
 	
 	@Autowired
 	ReservationRepository reservationRepository;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	HotelRoomRepository hotelRoomRepository;
 	
 	public ReservationDTO createReservation(ReservationDTO reservationDTO){
-		reservationRepository.save(new Reservation(reservationDTO));
+		Reservation newReservation = new Reservation(reservationDTO);
+		
+		User user = userRepository.getOne(reservationDTO.getUserId());
+		newReservation.setReservationUser(user);
+		
+		HotelRoom hotelRoom = hotelRoomRepository.getOne(reservationDTO.getHotelRoomId());
+		newReservation.setHotelRoom(hotelRoom);
+		
+		reservationRepository.save(newReservation);
 		return reservationDTO;
 	}
 	
