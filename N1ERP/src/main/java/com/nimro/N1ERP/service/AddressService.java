@@ -15,6 +15,7 @@ public class AddressService {
 	AddressRepository addressRepository;
 	
 	public Address createAddress(Address address){
+		System.out.println("Ušli smo u servis");
 		Address adr = new Address();
 		adr.setCountry(address.getCountry());
 		adr.setCity(address.getCity());

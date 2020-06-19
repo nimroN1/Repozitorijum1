@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.nimro.N1ERP.dto.ReservationDTO;
+import com.nimro.N1ERP.dto.UserDTO;
 import com.nimro.N1ERP.enums.Role;
 
 @Entity
@@ -37,6 +39,17 @@ public class User {
 	
 	public User() {
 		this.role=Role.REGISTERED_USER;
+	}
+	
+	public User(UserDTO u) {
+		
+		 this.setAddress(u.getAddress());
+		 this.setFirstName(u.getFirstName());
+		 this.setLastName(u.getLastName());
+		 this.setPassword(u.getPassword());
+		 this.setRole(u.getRole());
+		 this.setUsername(u.getUsername());
+		 
 	}
 
 	public List<Reservation> getReservations() {

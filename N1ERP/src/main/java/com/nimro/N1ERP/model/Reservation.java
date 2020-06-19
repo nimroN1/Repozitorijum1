@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.nimro.N1ERP.dto.ReservationDTO;
+
 @Entity
 public class Reservation {
 	
@@ -19,11 +21,16 @@ public class Reservation {
 	private LocalDateTime reservationDate;
 	
 	
-	  @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) private User user;
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
+	private User user;
 	 
 	
 	public Reservation() {
 		
+	}
+	
+	public Reservation(ReservationDTO rDTO) {
+		this.reservationDate = rDTO.getReservationDate();
 	}
 
 	public LocalDateTime getReservationDate() {

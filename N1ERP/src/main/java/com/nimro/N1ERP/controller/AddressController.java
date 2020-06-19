@@ -38,6 +38,7 @@ public class AddressController {
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Address> addAddress(@RequestBody Address address){
+		System.out.println("Ušli smo u kontroler");
 		Address retVal = addressService.createAddress(address);
 		return new ResponseEntity<Address>(retVal, HttpStatus.OK);
 	}

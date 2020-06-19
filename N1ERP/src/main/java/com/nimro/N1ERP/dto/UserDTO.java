@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.nimro.N1ERP.enums.Role;
 import com.nimro.N1ERP.model.Address;
+import com.nimro.N1ERP.model.Reservation;
+import com.nimro.N1ERP.model.User;
 
 public class UserDTO {
 	
@@ -20,6 +22,31 @@ public class UserDTO {
 	
 	public UserDTO() {
 		
+	}
+	
+	public UserDTO(User u) {
+		
+		 this.setAddress(u.getAddress());
+		 this.setFirstName(u.getFirstName());
+		 this.setLastName(u.getLastName());
+		 this.setPassword(u.getPassword());
+		 this.setRole(u.getRole());
+		 this.setUsername(u.getUsername());
+		 
+		 
+		 List<Reservation> userReservations = u.getReservations();
+		 List<ReservationDTO> userReservationsDTO = new ArrayList<ReservationDTO>();
+		 
+		 for(int j = 0; j<userReservations.size(); j++) {
+			 ReservationDTO aUserReservationDTO = new ReservationDTO();
+			 aUserReservationDTO.setId(userReservations.get(j).getId());
+			 aUserReservationDTO.setReservationDate(userReservations.get(j).getReservationDate());
+			 aUserReservationDTO.setUserId(u.getId());
+			 
+			 userReservationsDTO.add(aUserReservationDTO);
+		 }
+		 
+		 this.setReservations(userReservationsDTO);
 	}
 
 	public Long getId() {

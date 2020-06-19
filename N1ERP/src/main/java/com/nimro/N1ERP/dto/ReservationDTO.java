@@ -2,6 +2,8 @@ package com.nimro.N1ERP.dto;
 
 import java.time.LocalDateTime;
 
+import com.nimro.N1ERP.model.Reservation;
+
 public class ReservationDTO {
 	
 	private Long id;
@@ -10,6 +12,12 @@ public class ReservationDTO {
 	
 	public ReservationDTO() {
 		
+	}
+	
+	public ReservationDTO(Reservation r) {
+		this.id = r.getId();
+		this.reservationDate = r.getReservationDate();
+		this.userId = r.getReservationUser().getId();
 	}
 
 	public Long getId() {
