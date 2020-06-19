@@ -9,6 +9,7 @@ public class ReservationDTO {
 	private Long id;
 	private LocalDateTime reservationDate;
 	private Long userId;
+	private Long hotelRoomId;
 	
 	public ReservationDTO() {
 		
@@ -18,6 +19,7 @@ public class ReservationDTO {
 		this.id = r.getId();
 		this.reservationDate = r.getReservationDate();
 		this.userId = r.getReservationUser().getId();
+		this.hotelRoomId = r.getHotelRoom().getId();
 	}
 
 	public Long getId() {
@@ -42,6 +44,14 @@ public class ReservationDTO {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Long getHotelRoomId() {
+		return hotelRoomId;
+	}
+
+	public void setHotelRoomId(Long hotelRoomId) {
+		this.hotelRoomId = hotelRoomId;
 	}
 
 }

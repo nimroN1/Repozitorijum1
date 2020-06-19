@@ -20,6 +20,8 @@ public class Reservation {
 	private Long id;
 	private LocalDateTime reservationDate;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
+	private HotelRoom hotelRoom;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private User user;
@@ -66,6 +68,14 @@ public class Reservation {
 
 	public void setDate(LocalDateTime date) {
 		this.reservationDate = date;
+	}
+
+	public HotelRoom getHotelRoom() {
+		return hotelRoom;
+	}
+
+	public void setHotelRoom(HotelRoom hotelRoom) {
+		this.hotelRoom = hotelRoom;
 	}
 
 }

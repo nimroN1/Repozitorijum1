@@ -35,18 +35,12 @@ public class UserDTO {
 		 
 		 
 		 List<Reservation> userReservations = u.getReservations();
-		 List<ReservationDTO> userReservationsDTO = new ArrayList<ReservationDTO>();
 		 
 		 for(int j = 0; j<userReservations.size(); j++) {
-			 ReservationDTO aUserReservationDTO = new ReservationDTO();
-			 aUserReservationDTO.setId(userReservations.get(j).getId());
-			 aUserReservationDTO.setReservationDate(userReservations.get(j).getReservationDate());
-			 aUserReservationDTO.setUserId(u.getId());
-			 
-			 userReservationsDTO.add(aUserReservationDTO);
+			 ReservationDTO aUserReservationDTO = new ReservationDTO(userReservations.get(j));
+			 reservations.add(aUserReservationDTO);
 		 }
-		 
-		 this.setReservations(userReservationsDTO);
+
 	}
 
 	public Long getId() {
