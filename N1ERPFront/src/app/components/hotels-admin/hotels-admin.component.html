@@ -1,0 +1,56 @@
+
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Country</th>
+        <th scope="col">City</th>
+        <th scope="col">Street</th>
+        <th scope="col">Number</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let hotel of hotels">
+        
+        <td>{{hotel.name}}</td>
+        <td>{{hotel.address.country}}</td>
+        <td>{{hotel.address.city}}</td>
+        <td>{{hotel.address.street}}</td>
+        <td>{{hotel.address.number}}</td>
+        <td><button [routerLink] = "['/hotels-admin-update', hotel.id]">Edit</button></td>
+        <td><button (click) = "removeHotel(hotel.id)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="container">
+    <h1>Create new hotel</h1>
+    <hr>
+
+    <label ><b>Hotel name</b></label>
+    <input type="text" placeholder="Hotel name" name="name" [(ngModel)]="newHotel.name" >
+    <hr>
+
+    <label ><b>Country</b></label>
+    <input type="text" placeholder="Country" name="counry" [(ngModel)]="newHotel.address.country" >
+    <hr>
+
+    <label ><b>City</b></label>
+    <input type="text" placeholder="City" name="city" [(ngModel)]="newHotel.address.city" >
+    <hr>
+
+    <label ><b>Street</b></label>
+    <input type="text" placeholder="Street" name="street" [(ngModel)]="newHotel.address.street" >
+    <hr>
+
+    <label ><b>Number</b></label>
+    <input type="text" placeholder="Number" name="number" [(ngModel)]="newHotel.address.number" >
+    <hr>
+
+
+    <button class="add-hotel" (click) = "addHotel()">Add hotel</button>
+  </div>

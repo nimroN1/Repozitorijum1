@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nimro.N1ERP.dto.HotelDTO;
+import com.nimro.N1ERP.dto.MessageResponseDTO;
 import com.nimro.N1ERP.service.HotelService;
 
 @RestController
@@ -50,10 +51,10 @@ public class HotelController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> deleteHotel(@PathVariable Long id){
+	public ResponseEntity<MessageResponseDTO> deleteHotel(@PathVariable Long id){
 		hotelService.deleteHotel(id);
 		
-		return new ResponseEntity<>("HotelDTO deleted successfully", HttpStatus.OK);
+		return new ResponseEntity<MessageResponseDTO>(new MessageResponseDTO("Hotel deleted successfully"), HttpStatus.OK);
 	}
 
 }

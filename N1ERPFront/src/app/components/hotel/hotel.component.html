@@ -1,0 +1,72 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="https://ihg.scene7.com/is/image/ihg/holiday-inn-belgrade-2532143562-16x5?hei=512&qlt=85,0&resMode=sharp2&op_usm=1.75,0.9,2,0" alt="" class="img-rounded img-responsive" />
+                    </div>
+                    
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            {{hotel.name}}</h4>
+                        <small><cite title="">{{hotel.address.street}} {{hotel.address.number}}, 
+                            {{hotel.address.city}}, {{hotel.address.country}} <i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+
+                        <p>From</p>
+                        <input type="date" name="fromDate" [(ngModel)]="reservationDateFrom"/>
+
+                        <p>To</p>
+                        <input type="date" name="toDate" [(ngModel)]="reservationDateTo"/>
+
+                        <button (click)="findAvailableRooms()">Search</button>
+
+                    </div>
+                </div>
+            </div>
+                       
+            
+            <!-- Team -->
+            <section id="team" class="pb-5">
+            
+            
+                <div class="container">
+                    <h5 class="section-title h1">HOTEL ROOMS</h5>
+                    <div class="row">
+                        <!-- Team member -->
+                        <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let room of availableRoomsList">
+                            <div class="image-flip" >
+                                <div class="mainflip flip-0">
+                                    <div class="frontside">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <p><img class=" img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Hotel-room-renaissance-columbus-ohio.jpg/800px-Hotel-room-renaissance-columbus-ohio.jpg" alt="card image"></p>
+                                                <h4 class="card-title">Oznaka sobe: {{room.roomNumber}}</h4>
+                                                <p class="card-text">Broj kreveta: {{room.numberOfBeds}}</p>
+
+                                                <button (click)="makeReservation(room.id)">Make reservation</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./Team member -->
+            
+                    </div>
+                </div>
+            </section>
+            <!-- Team -->
+            
+
+        </div>
+    </div>
+</div>
+

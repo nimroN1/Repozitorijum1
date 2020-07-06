@@ -5,6 +5,9 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
+import { HotelComponent } from './components/hotel/hotel.component';
+import { HotelsAdminComponent } from './components/hotels-admin/hotels-admin.component';
+import { HotelsAdminUpdateComponent } from './components/hotels-admin-update/hotels-admin-update.component';
 
 
 const routes: Routes = [
@@ -12,18 +15,12 @@ const routes: Routes = [
   {path:'home', component:HomeComponent}, 
   {path:'register', component:RegisterComponent}, 
   {path:'hotels', component:HotelsComponent}, 
-/*   {path:'articles/:id', component:ArticlesComponent}, 
-  {
-    path:'about', 
-    component:AboutComponent, 
-    children:[
-      {path:'about-admin', component:AboutAdminComponent}
-    ]
-  }, */
+  {path:'hotels-admin', component:HotelsAdminComponent}, 
+  {path:'hotels-admin-update/:id', component:HotelsAdminUpdateComponent}, 
+  {path:'hotel/:id', component:HotelComponent},  
   {path:'', redirectTo:'/home', pathMatch:'full'}, 
-  {path:'**', component:PageNotFoundComponent}, 
+  {path:'**', component:PageNotFoundComponent} 
   
-
 ];
 
 @NgModule({

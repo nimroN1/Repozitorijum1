@@ -36,6 +36,12 @@ public class AddressController {
 		return new ResponseEntity<Address>(retVal, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "unique")
+	public ResponseEntity<List<Address>> getUniqueAddresses() {
+		List<Address> retVal = addressService.findUniqueAddresses();
+		return new ResponseEntity<List<Address>>(retVal, HttpStatus.OK);
+	}
+	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Address> addAddress(@RequestBody Address address){
 		System.out.println("Ušli smo u kontroler");

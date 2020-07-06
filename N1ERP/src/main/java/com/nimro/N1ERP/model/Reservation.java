@@ -1,6 +1,7 @@
 package com.nimro.N1ERP.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,7 +19,8 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private LocalDateTime reservationDate;
+	private LocalDateTime reservationDateFrom;
+	private LocalDateTime reservationDateTo;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
 	private HotelRoom hotelRoom;
@@ -32,15 +34,16 @@ public class Reservation {
 	}
 	
 	public Reservation(ReservationDTO rDTO) {
-		this.reservationDate = rDTO.getReservationDate();
+		this.reservationDateFrom = LocalDateTime.ofInstant(rDTO.getReservationDateFrom().toInstant(), ZoneId.systemDefault());
+		this.reservationDateTo = LocalDateTime.ofInstant(rDTO.getReservationDateTo().toInstant(), ZoneId.systemDefault());
 	}
 
-	public LocalDateTime getReservationDate() {
-		return reservationDate;
+	public LocalDateTime getReservationDateFrom() {
+		return reservationDateFrom;
 	}
 
-	public void setReservationDate(LocalDateTime reservationDate) {
-		this.reservationDate = reservationDate;
+	public void setReservationDateFrom(LocalDateTime reservationDate) {
+		this.reservationDateFrom = reservationDate;
 	}
 
 	
@@ -63,11 +66,11 @@ public class Reservation {
 	}
 
 	public LocalDateTime getDate() {
-		return reservationDate;
+		return reservationDateFrom;
 	}
 
 	public void setDate(LocalDateTime date) {
-		this.reservationDate = date;
+		this.reservationDateFrom = date;
 	}
 
 	public HotelRoom getHotelRoom() {
@@ -76,6 +79,14 @@ public class Reservation {
 
 	public void setHotelRoom(HotelRoom hotelRoom) {
 		this.hotelRoom = hotelRoom;
+	}
+
+	public LocalDateTime getReservationDateTo() {
+		return reservationDateTo;
+	}
+
+	public void setReservationDateTo(LocalDateTime reservationDateTo) {
+		this.reservationDateTo = reservationDateTo;
 	}
 
 }

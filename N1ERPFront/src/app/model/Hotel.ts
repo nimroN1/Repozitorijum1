@@ -4,6 +4,6 @@ import { HotelRoom } from './HotelRoom';
 export class Hotel{
     id:number;
 	name:String;
-	address:Address;
+	address:Address = new Address();
 	hotelRooms:HotelRoom[] = [];
 }

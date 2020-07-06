@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nimro.N1ERP.dto.DateRangeDTO;
 import com.nimro.N1ERP.dto.HotelRoomDTO;
+import com.nimro.N1ERP.dto.MessageResponseDTO;
 import com.nimro.N1ERP.service.HotelRoomService;
 
 @RestController
@@ -22,37 +24,46 @@ import com.nimro.N1ERP.service.HotelRoomService;
 public class HotelRoomController {
 	
 	@Autowired
-	HotelRoomService hotelService;
+	HotelRoomService hotelRoomService;
 	
 	@GetMapping(value = "all")
 	public ResponseEntity<List<HotelRoomDTO>> getAllHotelRooms() {
-		List<HotelRoomDTO> retVal = hotelService.findAllHotelRooms();
+		List<HotelRoomDTO> retVal = hotelRoomService.findAllHotelRooms();
 		return new ResponseEntity<List<HotelRoomDTO>>(retVal, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<HotelRoomDTO> getOneHotelRoom(@PathVariable Long id) {
-		HotelRoomDTO retVal = hotelService.findHotelRoom(id);
+		HotelRoomDTO retVal = hotelRoomService.findHotelRoom(id);
 		return new ResponseEntity<HotelRoomDTO>(retVal, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/{id}/available")
+	public ResponseEntity<List<HotelRoomDTO>> getAvailableHotelRooms(
+			@RequestBody DateRangeDTO dateRangeDTO, 
+			@PathVariable Long id) {
+		List<HotelRoomDTO> retVal = hotelRoomService.findAvailableHotelRooms(dateRangeDTO, id);
+		return new ResponseEntity<List<HotelRoomDTO>>(retVal, HttpStatus.OK);
 	}
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<HotelRoomDTO> addHotelRoom(@RequestBody HotelRoomDTO hotel){
-		HotelRoomDTO retVal = hotelService.createHotelRoom(hotel);
+		HotelRoomDTO retVal = hotelRoomService.createHotelRoom(hotel);
 		return new ResponseEntity<HotelRoomDTO>(retVal, HttpStatus.OK);
 	}
 	
 	
 	@PutMapping(consumes = "application/json")
 	public ResponseEntity<HotelRoomDTO> updateHotelRoom(@RequestBody HotelRoomDTO hotel){
-		HotelRoomDTO retVal = hotelService.updateHotelRoom(hotel);
+		HotelRoomDTO retVal = hotelRoomService.updateHotelRoom(hotel);
 		return new ResponseEntity<HotelRoomDTO>(retVal, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> deleteHotelRoom(@PathVariable Long id){
-		hotelService.deleteHotelRoom(id);
+	public ResponseEntity<MessageResponseDTO> deleteHotelRoom(@PathVariable Long id){
+		hotelRoomService.deleteHotelRoom(id);
 		
-		return new ResponseEntity<>("HotelRoomDTO deleted successfully", HttpStatus.OK);
+		return new ResponseEntity<MessageResponseDTO>(new MessageResponseDTO("Hotel room deleted successfully"), HttpStatus.OK);
 	}
+	
 }

@@ -30,6 +30,11 @@ public class AddressService {
 		 return addressRepository.findAll();
 	  }
 	  
+	  
+	  public List<Address> findUniqueAddresses(){
+		  return addressRepository.getUniqueAddresses();
+	  }
+	  
 	  public Address findAddress(long id) {
 		  Address retVal = addressRepository.getOne(id);
 		  return retVal;

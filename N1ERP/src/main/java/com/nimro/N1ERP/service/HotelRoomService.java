@@ -1,14 +1,18 @@
 package com.nimro.N1ERP.service;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nimro.N1ERP.dto.DateRangeDTO;
 import com.nimro.N1ERP.dto.HotelRoomDTO;
 import com.nimro.N1ERP.model.Hotel;
 import com.nimro.N1ERP.model.HotelRoom;
+import com.nimro.N1ERP.model.Reservation;
 import com.nimro.N1ERP.repository.HotelRepository;
 import com.nimro.N1ERP.repository.HotelRoomRepository;
 
@@ -40,6 +44,43 @@ public class HotelRoomService {
 		 }
 		 
 		 return hotelRoomsDTO;
+	  }
+	  
+	  public List<HotelRoomDTO> findAvailableHotelRooms(DateRangeDTO dateRangeDTO, Long id){
+		  Hotel hotel = hotelRepository.getOne(id);
+		  List<HotelRoom> hotelRooms = hotel.getHotelRooms();
+		  List<HotelRoomDTO> availableRooms = new ArrayList<HotelRoomDTO>(); 
+		  for(int i=0; i< hotelRooms.size(); i++) {
+			  HotelRoom room = hotelRooms.get(i);
+			  List<Reservation> reservations = room.getRoomReservations();
+			  boolean includeRoom = true;
+			  for(int j=0; j<reservations.size(); j++) {
+				  Reservation reservation = reservations.get(j);
+				  if(
+						  !((
+						  dateRangeDTO.getDateFrom().before(Date.from(reservation.getReservationDateFrom().atZone(ZoneId.systemDefault()).toInstant())) 
+						  && dateRangeDTO.getDateTo().before(Date.from(reservation.getReservationDateFrom().atZone(ZoneId.systemDefault()).toInstant()))
+						  )
+						  
+						  || 
+						  
+						  (
+								  dateRangeDTO.getDateFrom().after(Date.from(reservation.getReservationDateTo().atZone(ZoneId.systemDefault()).toInstant())) 
+								  && dateRangeDTO.getDateTo().after(Date.from(reservation.getReservationDateTo().atZone(ZoneId.systemDefault()).toInstant()))
+						  )
+						  )
+						  
+						  ) {
+					  
+					  includeRoom = false;
+				  }
+			  }
+			  
+			  if(includeRoom)
+				  availableRooms.add(new HotelRoomDTO(room));
+		  }
+		 return availableRooms;
+		  
 	  }
 	  
 	  public HotelRoomDTO findHotelRoom(Long id) {

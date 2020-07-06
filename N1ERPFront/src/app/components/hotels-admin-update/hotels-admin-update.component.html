@@ -1,0 +1,63 @@
+<div class="container">
+    <h1>Update hotel</h1>
+    <hr>
+
+    <label ><b>Hotel name</b></label>
+    <input type="text" placeholder="Hotel name" name="name" [(ngModel)]="hotel.name" required>
+    <hr>
+
+    <label ><b>Country</b></label>
+    <input type="text" placeholder="Country" name="counry" [(ngModel)]="hotel.address.country" required>
+    <hr>
+
+    <label ><b>City</b></label>
+    <input type="text" placeholder="City" name="city" [(ngModel)]="hotel.address.city" required>
+    <hr>
+
+    <label ><b>Street</b></label>
+    <input type="text" placeholder="Street" name="street" [(ngModel)]="hotel.address.street" required>
+    <hr>
+
+    <label ><b>Number</b></label>
+    <input type="text" placeholder="Number" name="number" [(ngModel)]="hotel.address.number" required>
+    <hr>
+
+
+    <button class="add-hotel" (click) = "updateHotel()">Update hotel</button>
+  </div>
+
+<h2>Hotel rooms</h2>
+  
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Room number</th>
+        <th scope="col">Number of beds</th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let room of hotel.hotelRooms">
+        
+        <td>{{room.roomNumber}}</td>
+        <td>{{room.numberOfBeds}}</td>
+        <td><button (click) = "removeRoom(room.id)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="container">
+    <h1>Create new room</h1>
+    <hr>
+
+    <label ><b>Room number</b></label>
+    <input type="text" placeholder="Room number" name="roomNumber" [(ngModel)]="newRoom.roomNumber" >
+    <hr>
+
+    <label ><b>Number of beds</b></label>
+    <input type="text" placeholder="Number of beds" name="numberOfBeds" [(ngModel)]="newRoom.numberOfBeds" >
+    <hr>
+
+    <button class="add-room" (click) = "addRoom()">Add room</button>
+  </div>

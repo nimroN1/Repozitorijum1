@@ -1,6 +1,7 @@
 export class Reservation{
     id:number;
-	reservationDate:Date;
+	reservationDateFrom:Date;
+	reservationDateTo:Date;
 	userId:number;
 	hotelRoomId:number;
 }

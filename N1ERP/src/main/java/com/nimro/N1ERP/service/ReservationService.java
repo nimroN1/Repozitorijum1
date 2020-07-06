@@ -1,5 +1,7 @@
 package com.nimro.N1ERP.service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +56,8 @@ public class ReservationService {
 	  
 	  public ReservationDTO updateReservation(ReservationDTO reservationDTO) {
 		  Reservation reservation = reservationRepository.getOne(reservationDTO.getId());
-		  reservation.setReservationDate(reservationDTO.getReservationDate());
+		  reservation.setReservationDateFrom(LocalDateTime.ofInstant(reservationDTO.getReservationDateFrom().toInstant(), ZoneId.systemDefault()));
+		  reservation.setReservationDateTo(LocalDateTime.ofInstant(reservationDTO.getReservationDateTo().toInstant(), ZoneId.systemDefault()));
 		  reservationRepository.save(reservation);
 		  
 		  return reservationDTO;
