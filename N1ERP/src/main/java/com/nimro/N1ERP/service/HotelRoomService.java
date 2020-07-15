@@ -97,6 +97,7 @@ public class HotelRoomService {
 	  }
 	  
 	  public void deleteHotelRoom(Long id) {
+		  System.out.println("hotelRoomService deleteHotelRoom id: "+id);
 		  hotelRoomRepository.deleteById(id);
 	  }
 

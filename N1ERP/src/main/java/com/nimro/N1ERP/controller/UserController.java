@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nimro.N1ERP.dto.LoginDTO;
+import com.nimro.N1ERP.dto.UserCredentialsDTO;
 import com.nimro.N1ERP.dto.UserDTO;
 import com.nimro.N1ERP.service.UserService;
 
@@ -42,8 +44,6 @@ public class UserController {
 		  UserDTO retVal = userService.createUser(userDTO); 
 		  return new ResponseEntity<UserDTO>(retVal, HttpStatus.OK); 
 	  }
-	  
-	  
 	
 		
 	  @PutMapping(consumes = "application/json") 
@@ -60,7 +60,10 @@ public class UserController {
 		  return new ResponseEntity<>("User deleted successfully", HttpStatus.OK); 
 	  }
 	 
-	 
+	 @PostMapping(consumes = "application/json", value = "/login")
+	  public ResponseEntity<LoginDTO> loginUser(@RequestBody UserCredentialsDTO userCredentialsDTO) {
+		  return new ResponseEntity<LoginDTO>(new LoginDTO(), HttpStatus.OK);
+	  }
 
 
 }

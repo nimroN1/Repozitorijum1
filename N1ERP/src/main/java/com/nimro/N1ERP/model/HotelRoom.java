@@ -23,7 +23,7 @@ public class HotelRoom {
 	private String roomNumber;
 	private int numberOfBeds;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) 
+	@ManyToOne(fetch=FetchType.LAZY) 
 	private Hotel hotel;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="hotelRoom")
