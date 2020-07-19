@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nimro.N1ERP.dto.UserDTO;
@@ -15,9 +16,13 @@ public class UserService {
 	
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	public UserDTO createUser(UserDTO userDTO){
-		userRepository.save(new User(userDTO));
+		User user = new User(userDTO);
+		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		userRepository.save(user);
 		return userDTO;
 	}
 	
@@ -36,6 +41,11 @@ public class UserService {
 	  
 	  public UserDTO findUser(Long id) {
 		  UserDTO retVal = new UserDTO(userRepository.getOne(id));
+		  return retVal;
+	  }
+	  
+	  public UserDTO findUserByUsername(String username) {
+		  UserDTO retVal = new UserDTO(userRepository.findByUsername(username));
 		  return retVal;
 	  }
 	  

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +37,7 @@ public class ReservationController {
 		ReservationDTO retVal = reservationService.findReservation(id); 
 		return new ResponseEntity<ReservationDTO>(retVal, HttpStatus.OK); }
 
-	
+		@PreAuthorize("REGISTERED_USER")
 	  @PostMapping(consumes = "application/json") 
 	  public ResponseEntity<ReservationDTO> addReservation(@RequestBody ReservationDTO userDTO){
 		  ReservationDTO retVal = reservationService.createReservation(userDTO); 
@@ -52,7 +53,7 @@ public class ReservationController {
 		  return new ResponseEntity<ReservationDTO>(retVal, HttpStatus.OK); 
 	  }
 		 
-	  
+	  @PreAuthorize("ADMIN")
 	  @DeleteMapping(value = "/{id}") 
 	  public ResponseEntity<?> deleteReservation(@PathVariable Long id){ 
 		  reservationService.deleteReservation(id);

@@ -4,46 +4,51 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
+@Component
+public class AuthenticationTokenFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	TokenUtils tokenUtils;
 	@Autowired
 	MyUserDetailsService userDetailsService;
 	
-	
-	@Override
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-			throws IOException, ServletException {
 
-		HttpServletRequest httpRequest = (HttpServletRequest) req;
-		String authToken = httpRequest.getHeader("Authorization");
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		
+		String authorisationHeader = request.getHeader("Authorization");
 		String username = null;
-		if (authToken != null) {
-			username = tokenUtils.getUsernameFromToken(authToken.substring(7));
+		String jwt = null;
+		if (authorisationHeader != null) {
+			jwt = authorisationHeader.substring(7);
+			username = tokenUtils.getUsernameFromToken(jwt);
 		}
+		
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-			if (tokenUtils.validateToken(authToken.substring(7), userDetails)) {
+			if (tokenUtils.validateToken(jwt, userDetails)) {
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
-				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
+				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 		}
-		chain.doFilter(req, res);
+		
+		filterChain.doFilter(request, response);
 		
 	}
 	

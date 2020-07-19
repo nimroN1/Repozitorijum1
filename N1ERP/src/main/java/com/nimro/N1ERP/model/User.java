@@ -46,7 +46,6 @@ public class User {
 		 this.setAddress(u.getAddress());
 		 this.setFirstName(u.getFirstName());
 		 this.setLastName(u.getLastName());
-		 this.setPassword(u.getPassword());
 		 this.setRole(u.getRole());
 		 this.setUsername(u.getUsername());
 		 

@@ -16,9 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class TokenUtils {
 	
-	public static String generateToken() {
-        return UUID.randomUUID().toString().replace("-", "").substring(0, 20);
-    }
+
 	 
 	 @Value("myXAuthSecret")
 		private String secret;
@@ -70,9 +68,14 @@ public class TokenUtils {
 
 		public String generateToken(UserDetails userDetails) {
 			Map<String, Object> claims = new HashMap<String, Object>();
-			claims.put("sub", userDetails.getUsername());
 			claims.put("created", new Date(System.currentTimeMillis()));
-			return Jwts.builder().setClaims(claims).setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+			return createToken(claims, userDetails.getUsername());
+		}
+		
+		private String createToken(Map<String, Object> claims, String subject) {
+			return Jwts.builder().setClaims(claims)
+					.setSubject(subject)
+					.setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
 					.signWith(SignatureAlgorithm.HS512, secret).compact();
 		}
 

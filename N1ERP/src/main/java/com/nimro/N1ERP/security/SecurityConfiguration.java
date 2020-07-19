@@ -3,6 +3,7 @@ package com.nimro.N1ERP.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,31 +11,47 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	MyUserDetailsService uds;
+	MyUserDetailsService userDetailsService;
+	@Autowired
+	AuthenticationTokenFilter authenticationTokenFilter;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder amb) throws Exception {
-		amb.userDetailsService(uds);
+		amb.userDetailsService(userDetailsService);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().authorizeRequests()
-		.antMatchers("/api/address/**").hasRole("ADMIN")
-		.antMatchers("/**").permitAll().anyRequest().authenticated();
+		http.cors().and().csrf().disable()
+		.authorizeRequests()
+		//.antMatchers("/api/address/**").hasAuthority("ADMIN")
+		.antMatchers("/api/user/login").permitAll()
+		.antMatchers("/api/user").permitAll()
+		.antMatchers("/**").permitAll()
+		.anyRequest().authenticated()
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	
+	
 
 }
